@@ -14,7 +14,7 @@ import "./App.css";
 const App = () => {
   
   return (
-    <div className="App">
+    <div className="app">
       <div className="navbar">
         <Navbar />
       </div>
@@ -31,7 +31,7 @@ const App = () => {
         </Layout>
       </div>
     </div>
-  );
+  )
 };
 
 export default App;

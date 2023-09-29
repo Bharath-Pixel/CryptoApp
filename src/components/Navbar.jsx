@@ -57,7 +57,7 @@ const Navbar = () => {
           <Link to = "/news" >News</Link>
         </Menu.Item>
       </Menu>
-      )};
+      )}
     </div>
   );
 };
