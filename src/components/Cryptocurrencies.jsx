@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Card, Row, Col, Input } from "antd";
 
 import { useGetCryptosQuery } from "../services/CryptoApi";
+import {motion} from "framer-motion";
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
@@ -31,7 +32,7 @@ const Cryptocurrencies = ({ simplified }) => {
           />
         </div>
       )}
-
+      
       <Row gutter={[32, 32]} className="crypto-card-container">
         {cryptos?.map((currency) => (
           <Col
@@ -42,7 +43,18 @@ const Cryptocurrencies = ({ simplified }) => {
             key={currency.uuid}
           >
             <Link key={currency.uuid} to={`/crypto/${currency.uuid}`}>
+              <motion.div
+                initial={{opacity:0, x:100}}
+                whileInView={{
+                  opacity: 1,
+                  x: 0,
+                  transition: { duration: 1, type: "spring", stiffness: 50, damping: 10 },
+                }}
+                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.01 }}
+              >
               <Card
+                className="crypto-cards"
                 title={`${currency.rank}. ${currency.name}`}
                 extra={<img className="crypto-image" src={currency.iconUrl} />}
                 hoverable
@@ -51,6 +63,7 @@ const Cryptocurrencies = ({ simplified }) => {
                 <p>Market Cap: {millify(currency.marketCap)}</p>
                 <p>Daily Change: {currency.change}%</p>
               </Card>
+              </motion.div>
             </Link>
           </Col>
         ))}

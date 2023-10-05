@@ -4,6 +4,7 @@ import { Select, Typography, Row, Col, Avatar, Card } from "antd";
 import moment from "moment/moment";
 import { useGetCryptoNewsQuery } from "../services/CryptoNewsApi";
 import { useGetCryptosQuery } from "../services/CryptoApi";
+import {motion} from "framer-motion";
 
 const { Text, Title } = Typography;
 
@@ -44,6 +45,16 @@ const News = ({ simplified }) => {
         }
         {cryptoNews?.value.map((news, i) => (
           <Col xs={24} sm={12} lg={8} key={i}>
+             <motion.div
+                initial={{opacity:0, y:100}}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 1, type: "spring", stiffness: 50, damping: 10 },
+                }}
+                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.01 }}
+              >
             <Card hoverable className="news-card">
               <a href={news.url} target="_blank" rel="noreferrer">
                 <div className="news-image-container">
@@ -72,6 +83,7 @@ const News = ({ simplified }) => {
                 </div>
               </a>
             </Card>
+            </motion.div>
           </Col>
         ))}
       </Row>
